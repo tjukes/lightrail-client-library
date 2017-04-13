@@ -1,8 +1,10 @@
 "use strict";
 
+require('dotenv').config();
+
 var Lightrail = require('./lightrailClient.js');
 
-var LR = new Lightrail();
+var LR = new Lightrail(process.env.ACCESS_TOKEN);
 
 console.log(LR);
 

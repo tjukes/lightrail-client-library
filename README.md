@@ -6,13 +6,14 @@ A simple Javascript/Node client library for the Lightrail API
 Run `npm install` to install dependencies.
 
 This library has the following dependencies:
-- `dotenv` to configure & read environment variables from the file `.env`
 - `request-promise` to make async requests to the API
 - `request` to support `request-promise` (peer dependency)
 
-### Reading your API access token from process.env
+### Your API access token
 
-Create a `.env` file in the root directory of your project. In that file, add your access token in this format (note, no quotation marks around any part of it):
+It is the responsibility of the client to pass their access token to the constructor function (`new Lightrail(access_token)`).
+
+For the time being, this is done in the 'testApp.js' file by storing the access token as an environment variable and useing the 'dotenv' library to read it. To set this up: create a `.env` file in the root directory of your project. In that file, add your access token in this format (note, no quotation marks around any part of it):
 `ACCESS_TOKEN=your-lightrail-access-token`
 
 ### Testing
