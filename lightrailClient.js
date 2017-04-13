@@ -38,9 +38,10 @@ function createContact(contact) {
 // Parameter 'card' is expected to be an object
 // with mandatory properties 'id', 'value', and 'programId'
 // and optional properties 'categories' and 'contactId'
+// **Usage note - this function returns a promise**
 function createPointsCard(card) {
   // TODO: validate argument
-  rp({
+  return rp({
     method: 'POST',
     uri: baseURL + 'cards',
     headers: customHeaders,
@@ -57,15 +58,6 @@ function createPointsCard(card) {
       'contactId': card.contactId
     },
     json: true
-  })
-  .then(function(returnedCard) {
-    // TODO: save returned card instead of logging it
-    //       & update local card obj with Lightrail ID
-    console.log(returnedCard);
-  })
-  .catch(function(err) {
-    // TODO: better error handling
-    console.log(err);
   });
 }
 
@@ -143,7 +135,13 @@ function getBalance(card) {
 //   'categories': {},
 //   'contactId': 'contact-f1a7888f803d4e2d815e3d9447fbf276'
 // };
-// createPointsCard(card);
+// createPointsCard(card)
+// .then(function(returnedCard) {
+//   console.log(returnedCard);
+// })
+// .catch(function(err) {
+//   console.log(err);
+// });
 //
 // // Updating points on a card
 //
