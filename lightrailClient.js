@@ -75,6 +75,33 @@ function createPointsCard(card) {
   });
 }
 
+// CHANGING POINTS ON A CARD
+
+// Parameter 'card' is expected to be an object with mandatory property 'lightrailId'
+// Parameter 'points' is expected to be a positive or negative integer
+// Parameter 'transactionId' will be passed directly to the 'userSuppliedId' field required by the API
+function updatePoints(card, points, transactionId) {
+  rp({
+    method: 'POST',
+    uri: baseURL + 'cards/' + card.lightrailId + '/code/transactions',
+    headers: customHeaders,
+    body: {
+      'value': points,
+      'currency': 'XXX',
+      'userSuppliedId': transactionId
+    },
+    json: true
+  })
+  .then(function(returnedTransaction) {
+    // TODO: use valueAvailableAfterTransaction
+    console.log(returnedTransaction);
+  })
+  .catch(function(err) {
+    // TODO: better error handling
+    console.log(err);
+  });
+}
+
 
 
 // // FUNCTIONALITY CHECKING
@@ -98,3 +125,7 @@ function createPointsCard(card) {
 //   'contactId': 'contact-f1a7888f803d4e2d815e3d9447fbf276'
 // };
 // createPointsCard(card);
+//
+// // Updating points on a card
+//
+// updatePoints(card, 5, 'someexample');
