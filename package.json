@@ -4,7 +4,7 @@
   "description": "A simple Javascript client/helper library for the Lightrail API",
   "main": "lightrailClient.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "author": "Tana Jukes",
   "license": "MIT",
