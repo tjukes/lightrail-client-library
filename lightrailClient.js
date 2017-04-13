@@ -39,6 +39,42 @@ function createContact(contact) {
   });
 }
 
+// CREATING A CARD
+
+// Parameter 'card' is expected to be an object
+// with mandatory properties 'id', 'value', and 'programId'
+// and optional properties 'categories' and 'contactId'
+function createPointsCard(card) {
+  // TODO: validate argument
+  rp({
+    method: 'POST',
+    uri: baseURL + 'cards',
+    headers: customHeaders,
+    body: {
+      'userSuppliedId': card.id,
+      'code': {
+        'initialValue': card.value,
+        // Since this is a points card, hardcode to non-currency
+        'currency': 'XXX',
+        'programId': card.programId
+      },
+      // TODO: handle undefined for optional fields (eg default to {} or '')
+      'categories': card.categories,
+      'contactId': card.contactId
+    },
+    json: true
+  })
+  .then(function(returnedCard) {
+    // TODO: save returned card instead of logging it
+    //       & update local card obj with Lightrail ID
+    console.log(returnedCard);
+  })
+  .catch(function(err) {
+    // TODO: better error handling
+    console.log(err);
+  });
+}
+
 
 
 // // FUNCTIONALITY CHECKING
@@ -50,3 +86,15 @@ function createContact(contact) {
 //   'email': 'ex@example.com'
 // }
 // createContact(sampleContact);
+//
+// // Card creation
+//
+// var card = {
+//   'id': '1010101010101010',
+//   'lightrailId': 'card-99812714217a460d88383852bdfe0204',
+//   'value': '5',
+//   'programId': 'program-eb6f3e8b9d7548a0b51b872375f635c3',
+//   'categories': {},
+//   'contactId': 'contact-f1a7888f803d4e2d815e3d9447fbf276'
+// };
+// createPointsCard(card);

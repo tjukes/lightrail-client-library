@@ -17,4 +17,4 @@ Create a `.env` file in the root directory of your project. In that file, add yo
 
 ### Testing
 
-Tests will be incorporated soon. To test functionality manually, uncomment the lines at the bottom of `lightrailClient.js` that create a sample contact object and call the API with it, then run the file from your terminal with Node. The newly created Lightrail contact should print out as JSON. 
+Tests will be incorporated soon. To test functionality manually, uncomment the lines at the bottom of `lightrailClient.js` that pertain to which function/s you want to check and **change the specific IDs in the sample object to ones that refer to a card, program, and contact you already have**. Run the file from your terminal with Node. Results from successful API calls should print out as JSON. 
