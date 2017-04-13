@@ -11,4 +11,17 @@ describe("Lightrail", function() {
     expect(lr instanceof Lightrail).toBe(true);
   });
 
+  it("should not be constructed without a string passed in as access token", function() {
+    var lrEmpty = function() { new Lightrail(); };
+    var lrNull = function() { new Lightrail(null); };
+    var lrUndefined = function() { new Lightrail(undefined); };
+    var lrNumber = function() { new Lightrail(123); };
+    var lrObject = function() { new Lightrail({'foo': 'bar'}); };
+
+    expect(lrEmpty).toThrow();
+    expect(lrNull).toThrow();
+    expect(lrUndefined).toThrow();
+    expect(lrNumber).toThrow();
+    expect(lrObject).toThrow();
+  });
 });
