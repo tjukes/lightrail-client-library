@@ -67,7 +67,7 @@ function createPointsCard(card) {
 // Parameter 'points' is expected to be a positive or negative integer
 // Parameter 'transactionId' will be passed directly to the 'userSuppliedId' field required by the API
 function updatePoints(card, points, transactionId) {
-  rp({
+  return rp({
     method: 'POST',
     uri: baseURL + 'cards/' + card.lightrailId + '/code/transactions',
     headers: customHeaders,
@@ -77,14 +77,6 @@ function updatePoints(card, points, transactionId) {
       'userSuppliedId': transactionId
     },
     json: true
-  })
-  .then(function(returnedTransaction) {
-    // TODO: use valueAvailableAfterTransaction
-    console.log(returnedTransaction);
-  })
-  .catch(function(err) {
-    // TODO: better error handling
-    console.log(err);
   });
 }
 
@@ -145,7 +137,13 @@ function getBalance(card) {
 //
 // // Updating points on a card
 //
-// updatePoints(card, 5, 'someexample');
+// updatePoints(card, 5, 'someexample')
+// .then(function(returnedTransaction) {
+//   console.log(returnedTransaction);
+// })
+// .catch(function(err) {
+//   console.log(err);
+// });
 //
 // // Checking the balance of points on a card
 //
