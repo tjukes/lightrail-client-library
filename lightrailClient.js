@@ -9,12 +9,13 @@ var customHeaders = {
   'Authorization': 'Bearer ' + process.env.ACCESS_TOKEN
 };
 
+// **Usage note - the functions provided in this file each return a promise**
+
 // CREATING A CONTACT
 
 // Parameter 'contact' is expected to be an object
 // with mandatory property 'id'
 // and optional properties 'email', 'firstName', 'lastName'
-// **Usage note - this function returns a promise**
 function createContact(contact) {
   // TODO: validate argument
   return rp({
@@ -38,7 +39,6 @@ function createContact(contact) {
 // Parameter 'card' is expected to be an object
 // with mandatory properties 'id', 'value', and 'programId'
 // and optional properties 'categories' and 'contactId'
-// **Usage note - this function returns a promise**
 function createPointsCard(card) {
   // TODO: validate argument
   return rp({
