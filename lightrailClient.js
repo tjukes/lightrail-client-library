@@ -9,14 +9,17 @@ var customHeaders = {
   'Authorization': 'Bearer ' + process.env.ACCESS_TOKEN
 };
 
-// **Usage note - the functions provided in this file each return a promise**
+
+function Lightrail() {}
+
+// **Usage note - these functions each return a promise**
 
 // CREATING A CONTACT
 
 // Parameter 'contact' is expected to be an object
 // with mandatory property 'id'
 // and optional properties 'email', 'firstName', 'lastName'
-function createContact(contact) {
+Lightrail.prototype.createContact = function(contact) {
   // TODO: validate argument
   return rp({
     method: 'POST',
@@ -31,7 +34,7 @@ function createContact(contact) {
     },
     json: true
   });
-}
+};
 
 
 // CREATING A CARD
@@ -39,7 +42,7 @@ function createContact(contact) {
 // Parameter 'card' is expected to be an object
 // with mandatory properties 'id', 'value', and 'programId'
 // and optional properties 'categories' and 'contactId'
-function createPointsCard(card) {
+Lightrail.prototype.createPointsCard = function(card) {
   // TODO: validate argument
   return rp({
     method: 'POST',
@@ -59,14 +62,14 @@ function createPointsCard(card) {
     },
     json: true
   });
-}
+};
 
 // CHANGING POINTS ON A CARD
 
 // Parameter 'card' is expected to be an object with mandatory property 'lightrailId'
 // Parameter 'points' is expected to be a positive or negative integer
 // Parameter 'transactionId' will be passed directly to the 'userSuppliedId' field required by the API
-function updatePoints(card, points, transactionId) {
+Lightrail.prototype.updatePoints = function(card, points, transactionId) {
   return rp({
     method: 'POST',
     uri: baseURL + 'cards/' + card.lightrailId + '/code/transactions',
@@ -78,71 +81,19 @@ function updatePoints(card, points, transactionId) {
     },
     json: true
   });
-}
+};
 
 // CHECKING CARD BALANCE
 
 // Parameter 'card' is expected to be an object with mandatory property 'lightrailId'
-function getBalance(card) {
+Lightrail.prototype.getBalance = function(card) {
   return rp({
     method: 'GET',
     uri: baseURL + 'cards/' + card.lightrailId + '/code/balance',
     headers: customHeaders,
     json: true
   });
-}
+};
 
 
-// // FUNCTIONALITY CHECKING
-//
-// // Contact creation
-//
-// var sampleContact = {
-//   'id': '10101010101010',
-//   'email': 'ex@example.com'
-// };
-// createContact(sampleContact)
-// .then(function(returnedContact) {
-//   console.log(returnedContact);
-// })
-// .catch(function(error) {
-//   console.log(error);
-// });
-//
-// // Card creation
-//
-// var card = {
-//   'id': '1010101010101010',
-//   'lightrailId': 'card-99812714217a460d88383852bdfe0204',
-//   'value': '5',
-//   'programId': 'program-eb6f3e8b9d7548a0b51b872375f635c3',
-//   'categories': {},
-//   'contactId': 'contact-f1a7888f803d4e2d815e3d9447fbf276'
-// };
-// createPointsCard(card)
-// .then(function(returnedCard) {
-//   console.log(returnedCard);
-// })
-// .catch(function(err) {
-//   console.log(err);
-// });
-//
-// // Updating points on a card
-//
-// updatePoints(card, 5, 'someexample')
-// .then(function(returnedTransaction) {
-//   console.log(returnedTransaction);
-// })
-// .catch(function(err) {
-//   console.log(err);
-// });
-//
-// // Checking the balance of points on a card
-//
-// getBalance(card)
-// .then(function(balance) {
-//   console.log(balance);
-// })
-// .catch(function(err) {
-//   console.log(err);
-// });
+module.exports = Lightrail;
