@@ -84,19 +84,11 @@ function updatePoints(card, points, transactionId) {
 
 // Parameter 'card' is expected to be an object with mandatory property 'lightrailId'
 function getBalance(card) {
-  rp({
+  return rp({
     method: 'GET',
     uri: baseURL + 'cards/' + card.lightrailId + '/code/balance',
     headers: customHeaders,
     json: true
-  })
-  .then(function(balance) {
-    // TODO: handle balance instead of logging the object
-    console.log(balance);
-  })
-  .catch(function(err) {
-    // TODO: better error handling
-    console.log(err);
   });
 }
 
@@ -147,4 +139,10 @@ function getBalance(card) {
 //
 // // Checking the balance of points on a card
 //
-// getBalance(card);
+// getBalance(card)
+// .then(function(balance) {
+//   console.log(balance);
+// })
+// .catch(function(err) {
+//   console.log(err);
+// });
