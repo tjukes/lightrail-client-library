@@ -12,7 +12,9 @@
     "request": "^2.81.0",
     "request-promise": "^4.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jasmine": "^2.5.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tjukes/lightrail-client-library.git"
