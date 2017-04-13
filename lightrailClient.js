@@ -1,16 +1,15 @@
 "use strict";
 
-require('dotenv').config();
 var rp = require('request-promise');
 
-var baseURL = 'https://api.lightrail.com/v1/';
-var customHeaders = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + process.env.ACCESS_TOKEN
-};
 
-
-function Lightrail() {}
+function Lightrail(accessToken) {
+  this.BASE_URL = 'https://api.lightrail.com/v1/';
+  this.HEADERS = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + accessToken
+  };
+}
 
 // **Usage note - these functions each return a promise**
 
@@ -23,8 +22,8 @@ Lightrail.prototype.createContact = function(contact) {
   // TODO: validate argument
   return rp({
     method: 'POST',
-    uri: baseURL + 'contacts',
-    headers: customHeaders,
+    uri: this.BASE_URL + 'contacts',
+    headers: this.HEADERS,
     body: {
       'userSuppliedId': contact.id,
       // TODO: handle undefined optional properties
@@ -46,8 +45,8 @@ Lightrail.prototype.createPointsCard = function(card) {
   // TODO: validate argument
   return rp({
     method: 'POST',
-    uri: baseURL + 'cards',
-    headers: customHeaders,
+    uri: this.BASE_URL + 'cards',
+    headers: this.HEADERS,
     body: {
       'userSuppliedId': card.id,
       'code': {
@@ -72,8 +71,8 @@ Lightrail.prototype.createPointsCard = function(card) {
 Lightrail.prototype.updatePoints = function(card, points, transactionId) {
   return rp({
     method: 'POST',
-    uri: baseURL + 'cards/' + card.lightrailId + '/code/transactions',
-    headers: customHeaders,
+    uri: this.BASE_URL + 'cards/' + card.lightrailId + '/code/transactions',
+    headers: this.HEADERS,
     body: {
       'value': points,
       'currency': 'XXX',
@@ -89,8 +88,8 @@ Lightrail.prototype.updatePoints = function(card, points, transactionId) {
 Lightrail.prototype.getBalance = function(card) {
   return rp({
     method: 'GET',
-    uri: baseURL + 'cards/' + card.lightrailId + '/code/balance',
-    headers: customHeaders,
+    uri: this.BASE_URL + 'cards/' + card.lightrailId + '/code/balance',
+    headers: this.HEADERS,
     json: true
   });
 };
