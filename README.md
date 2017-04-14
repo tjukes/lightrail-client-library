@@ -1,20 +1,17 @@
 # lightrail-client-library
 A simple Javascript/Node client library for the Lightrail API
 
-### Setup
+It offers basic functionality: contact creation, card creation for tracking points, updating points, checking points balance.
 
-Run `npm install` to install dependencies.
+### Use
 
-This library has the following dependencies:
-- `request-promise` to make async requests to the API
-- `request` to support `request-promise` (peer dependency)
+This library assumes that you have an existing Lightrail account and have created a Program for allocating loyalty points to Contacts. You will need your access token and program ID for several functions.
 
-### Your API access token
+Install this library: `npm install --save https://github.com/tjukes/lightrail-client-library`
 
-It is the responsibility of the client to pass their access token to the constructor function (`new Lightrail(access_token)`).
+Require it in your script: `var Lightrail = require('lightrail-client');`
 
-For the time being, this is done in the 'testApp.js' file by storing the access token as an environment variable and useing the 'dotenv' library to read it. To set this up: create a `.env` file in the root directory of your project. In that file, add your access token in this format (note, no quotation marks around any part of it):
-`ACCESS_TOKEN=your-lightrail-access-token`
+Instantiate a new 'Lightrail' by calling the constructor and passing in your access token: eg, `var LR = new Lightrail(process.env.ACCESS_TOKEN);` if you have it stored as an environment variable
 
 ### Testing
 
