@@ -6,6 +6,18 @@ describe("Lightrail", function() {
   var Lightrail = require('../lightrailClient.js');
   var lr;
 
+  function getRandomId() {
+    return Math.ceil(Math.random()*1000000000000).toString();
+  }
+
+  function getRandomShortText() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  }
+
   it("should be constructed from the constructor", function() {
     lr = new Lightrail(process.env.ACCESS_TOKEN);
     expect(lr instanceof Lightrail).toBe(true);
@@ -23,5 +35,36 @@ describe("Lightrail", function() {
     expect(lrUndefined).toThrow();
     expect(lrNumber).toThrow();
     expect(lrObject).toThrow();
+  });
+
+
+  describe("Lightrail contact creation - async", function() {
+    beforeEach(function() {
+      lr = new Lightrail(process.env.ACCESS_TOKEN);
+    });
+
+    it("should create a contact with valid parameters", function(done) {
+      var contact = {
+        'id': getRandomId(),
+        'email': getRandomShortText() + '@example.com',
+        'firstName': getRandomShortText(),
+        'lastName': getRandomShortText()
+      };
+      lr.createContact(contact)
+      .then(function(returnedContact) {
+        expect(returnedContact.contact.contactId).toContain('contact');
+        done();
+      });
+    });
+
+    it("should create a contact when optional parameters not present", function(done) {
+      var contact = { 'id': getRandomId() };
+      lr.createContact(contact)
+      .then(function(returnedContact) {
+        expect(returnedContact.contact.contactId).toContain('contact');
+        done();
+      });
+    });
+
   });
 });
