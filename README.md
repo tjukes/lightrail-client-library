@@ -18,4 +18,6 @@ For the time being, this is done in the 'testApp.js' file by storing the access 
 
 ### Testing
 
-Tests will be incorporated soon. To test functionality manually, uncomment the relevant lines in the bottom of `testApp.js` that pertain to which function/s you want to check and **change the specific IDs in the sample object to ones that refer to a card, program, and contact you already have**. Run the file from your terminal with Node. Results from successful API calls should print out as JSON.
+Tests are provided with Jasmine. To run the tests, run either `jasmine` or `npm test`.
+
+Note, test coverage is currently incomplete. Sample method calls (manual tests) are provided in the `testApp.js` file. To use this file to check functionality manually, uncomment the relevant lines in the bottom of the file that pertain to which function/s you want to check and **change the specific IDs in the sample object to ones that refer to a card, program, and contact you already have**. Run the file from your terminal with Node. Results from successful API calls should print out as JSON.

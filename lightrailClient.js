@@ -4,6 +4,10 @@ var rp = require('request-promise');
 
 
 function Lightrail(accessToken) {
+  if (typeof accessToken !== 'string') {
+    throw new Error("Argument 'accessToken' is a required string");
+  }
+
   this.BASE_URL = 'https://api.lightrail.com/v1/';
   this.HEADERS = {
     'Content-Type': 'application/json',
