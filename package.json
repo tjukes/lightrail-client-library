@@ -1,6 +1,6 @@
 {
   "name": "lightrail-client",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A simple Javascript client/helper library for the Lightrail API",
   "main": "lightrailClient.js",
   "scripts": {
